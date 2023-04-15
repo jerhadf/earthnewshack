@@ -9,7 +9,6 @@ import ast
 openai.api_key = "" # Replace this with your OpenAI API key
 
 
-
 def generate_summary(json_article_content):
     input_text = json_article_content['body']
 

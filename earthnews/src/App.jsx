@@ -26,6 +26,7 @@ export default function App() {
   }
   return (
     <main>
+      
       <div>
       <GoogleMapReact
         bootstrapURLKeys={{ key: "" }}

@@ -22,4 +22,7 @@ import type * as sendMessage from "../sendMessage";
  * This type should be used with type-parameterized classes like
  * `ConvexReactClient` to create app-specific types.
  */
-export type API = ApiFromModules<{}>;
+export type API = ApiFromModules<{
+  listMessages: typeof listMessages;
+  sendMessage: typeof sendMessage;
+}>;

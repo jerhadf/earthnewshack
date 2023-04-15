@@ -10,7 +10,8 @@
  */
 
 import type { ApiFromModules } from "convex/api";
-import type * as messages from "../messages";
+import type * as listMessages from "../listMessages";
+import type * as sendMessage from "../sendMessage";
 
 /**
  * A type describing your app's public Convex API.
@@ -21,6 +22,4 @@ import type * as messages from "../messages";
  * This type should be used with type-parameterized classes like
  * `ConvexReactClient` to create app-specific types.
  */
-export type API = ApiFromModules<{
-  messages: typeof messages;
-}>;
+export type API = ApiFromModules<{}>;

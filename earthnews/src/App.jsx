@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useMutation, useQuery } from "../convex/_generated/react";
 import React from "react";
 import GoogleMapReact from 'google-map-react';
+import Button from '@mui/material/Button';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -26,6 +27,10 @@ export default function App() {
   }
   return (
     <main>
+      {/* Button from Material UI */}
+      <div>
+        <Button variant="contained">Hello World</Button>
+      </div>
       
       <div>
       <GoogleMapReact

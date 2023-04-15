@@ -10,6 +10,11 @@
     "dev:init": "convex dev --once"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@fontsource/roboto": "^4.5.8",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.12.0",
     "convex": "^0.12.4",
     "google-map-react": "^2.2.0",
     "react": "^17.0.2",

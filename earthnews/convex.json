@@ -1,7 +1,7 @@
 {
-  "project": "earthnews",
-  "team": "jerhadf",
-  "prodUrl": "https://modest-crocodile-955.convex.cloud",
+  "project": "test-project",
+  "team": "shivangitandon",
+  "prodUrl": "https://brown-bear-253.convex.cloud",
   "functions": "convex/",
   "authInfo": []
 }

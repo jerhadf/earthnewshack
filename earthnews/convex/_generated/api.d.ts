@@ -10,6 +10,10 @@
  */
 
 import type { ApiFromModules } from "convex/api";
+import type * as actions_openai from "../actions/openai";
+import type * as identity from "../identity";
+import type * as messages from "../messages";
+import type * as threads from "../threads";
 
 /**
  * A type describing your app's public Convex API.
@@ -20,4 +24,9 @@ import type { ApiFromModules } from "convex/api";
  * This type should be used with type-parameterized classes like
  * `ConvexReactClient` to create app-specific types.
  */
-export type API = ApiFromModules<{}>;
+export type API = ApiFromModules<{
+  "actions/openai": typeof actions_openai;
+  identity: typeof identity;
+  messages: typeof messages;
+  threads: typeof threads;
+}>;

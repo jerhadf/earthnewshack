@@ -1,60 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useState, useMemo } from "react";
+import { useMutation, usePaginatedQuery } from "../convex/_generated/react";
+import { OrSignIn } from "./components/OrSignIn";
+import { AddIdentity } from "./components/AddIdentity";
+import { Thread } from "./components/Thread";
 
-function App() {
-  const [count, setCount] = useState(0)
+// below allows us to access Convex from inside the react app 
+import { ConvexProvider, ConvexReactClient } from "convex/react";
+
+// This file is the react web app - it is the client side and pretty much the entire front end! 
+export default function App() {
+  const { loadMore, results, status } = usePaginatedQuery("messages:list", {
+    initialNumItems: 100,
+  });
+  const messages = useMemo(() => results.slice().reverse(), [results]);
+
+  const [newThreadId, setNewThreadId] = useState(null);
+  const createThread = useMutation("threads:add");
+  useEffect(() => {
+    if (newThreadId && messages.find((m) => newThreadId.equals(m.threadId)))
+      setNewThreadId(null);
+  }, [newThreadId, messages]);
 
   return (
-    <div className="App">
-      {messages.map((message, i) => (
-        <p key={i}>
-          <span>{message.author}: </span>
-          <span style={{ whiteSpace: "pre-wrap" }}>
-            {message.body ?? "..."}
-          </span>
-        </p>
-      ))}
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        setNewMessageText("");
-        sendMessage(newMessageText);
-      }}>
-        <input
-          value={newMessageText}
-          onChange={e => setNewMessageText(e.target.value)}
-          placeholder="Write a message…"
-        />
-        <input type="submit" value="Send" disabled={!newMessageText} />
-      </form>
-    </div>
-    // <div className="App">
-    //   <div>
-    //     <a href="https://vitejs.dev" target="_blank">
-    //       <img src={viteLogo} className="logo" alt="Vite logo" />
-    //     </a>
-    //     <a href="https://reactjs.org" target="_blank">
-    //       <img src={reactLogo} className="logo react" alt="React logo" />
-    //     </a>
-    //   </div>
-    //   <h1>Vite + React</h1>
-    //   <div className="card">
-    //     <button onClick={() => setCount((count) => count + 1)}>
-    //       count is {count}
-    //     </button>
-    //     <p>
-    //       Edit <code>src/App.jsx</code> and save to test HMR
-    //     </p>
-    //   </div>
-    //   <p className="read-the-docs">
-    //     Click on the Vite and React logos to learn more
-    //   </p>
-    //   <div className="reactGPT-app">
-        
-    //   </div>
-      
-    // </div>
-    
-  )
+    <main>
+      <h1>Earth News</h1>
+      <p>Hello! Here's Earth News</p>
+      {status === "CanLoadMore" && (
+        <button onClick={() => loadMore(100)}>Load More</button>
+      )}
+      {messages
+        .reduce((threads, message) => {
+          const thread = threads.find(
+            (threadMessages) =>
+              threadMessages[0].threadId?.toString() ===
+              message.threadId?.toString()
+          );
+          if (thread) {
+            thread.push(message);
+          } else {
+            threads.push([message]);
+          }
+          return threads;
+        }, [])
+        .map((messages, index, threads) => (
+          <details
+            key={"thread" + index}
+            open={!newThreadId && index === threads.length - 1}
+          >
+            <summary>{messages[0]?.body?.substring(0, 100)}...</summary>
+            <Thread messages={messages} threadId={messages[0].threadId} />
+          </details>
+        ))}
+      {newThreadId && (
+        <>
+          <Thread messages={[]} threadId={newThreadId} />
+        </>
+      )}
+      <OrSignIn>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            createThread().then(setNewThreadId);
+          }}
+          disabled={newThreadId}
+        >
+          Start New Thread
+        </button>
+      </OrSignIn>
+      <AddIdentity />
+    </main>
+  );
 }

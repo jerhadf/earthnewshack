@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "convex": "^0.12.4"
+    "convex": "^0.12.4",
+    "google-map-react": "^2.2.0"
   }
 }

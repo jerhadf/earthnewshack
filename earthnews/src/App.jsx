@@ -6,7 +6,6 @@ import GoogleMapReact from 'google-map-react';
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 export default function App() {
-
   const messages = useQuery("listMessages") || [];
 
   const [newMessageText, setNewMessageText] = useState("");
@@ -18,6 +17,10 @@ export default function App() {
     setNewMessageText("");
     await sendMessage({ body: newMessageText, author: name });
   }
+
+  // put functions for handling articles data and maps here
+
+  // FRONTEND STARTS HERE - REACT COMPONENTS + HTML
   return (
     <main>
     <div className="container">
@@ -26,11 +29,37 @@ export default function App() {
         <input className="search-bar" type="text" placeholder="Search news..." />
         <button className="search-button">Search</button>
       </div>
+      <h1>EarthNews</h1>
+      <h2>
+        EarthNews is a decentralized platform for climate news and AI-based
+        content summarization & explanation.
+      </h2>
+      <div className="earth-news">
+        {/* Header with EarthNews title and background image */}
+        <header
+          className="header"
+          style={{ backgroundImage: `url(/path/to/your/image.jpg)` }}
+        >
+          <h1 className="title">EarthNews</h1>
+        </header>
+        {/* Section for map and search bar */}
+        <main className="main-content">
+          <YourMapComponent />
+          {/* Search bar */}
+          <input className="search-bar" type="text" placeholder="Search" />
+          {/* Button from Material UI */}
+          <div>
+            <Button variant="contained">Hello World</Button>
+          </div>
+        </main>
+      </div>
+
+      {/* Messages Stuff - FROM CONVEX DEMO */}
       <p className="badge">
         <span>{name}</span>
       </p>
       <ul>
-        {messages.map(message => (
+        {messages.map((message) => (
           <li key={message._id.toString()}>
             <span>{message.author}:</span>
             <span>{message.body}</span>
@@ -48,6 +77,6 @@ export default function App() {
          />
          <input type="submit" value="Send" disabled={!newMessageText} />
        </form>
-       </main>
-    )};
-
+    </main>
+  );
+}

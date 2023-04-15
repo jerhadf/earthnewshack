@@ -1,4 +1,44 @@
-/* reset */
+
+/* Styles for earth news header section */ 
+.header {
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Adjust this value to control the height of the header */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 4rem;
+  color: #ffffff; /* Change the color as per your design preference */
+  /* Add any other title styles you prefer */
+}
+
+.earth-news {
+  /* General styles for the EarthNews component */
+}
+
+.header {
+  /* Styles for the header section */
+}
+
+.main-content {
+  /* Styles for the main content section */
+}
+.main-content {
+  padding: 2rem;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  /* Add any other search bar styles you prefer */
+}
+
+/* reset - default styles */
 * {
   margin: 0;
   padding: 0;

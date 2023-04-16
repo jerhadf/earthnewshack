@@ -117,10 +117,7 @@ export default function App() {
       {/* Hero section with background image */}
       <ParallaxHero>
         <h1 className="title">PLANET PULSE</h1>
-        <p className="desc">
-          A climate news aggregator, summarizer, explainer, and global
-          visualizer
-        </p>
+        <p className="tagline">it's time to take the earth's pulse</p>
         <div className="search-bar">
           <Paper
             component="form"
@@ -147,6 +144,10 @@ export default function App() {
             </IconButton>
           </Paper>
         </div>
+        <p id="description">
+            Collect climate news from around the world. Summarize & explain with
+            AI. Visualize on a world map.
+        </p>
       </ParallaxHero>
 
       {/* Main content - map */}

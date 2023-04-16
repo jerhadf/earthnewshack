@@ -24,24 +24,28 @@
   font-family: Avenir Book, Avenir, Roboto, sans-serif;
   text-align: center;
   font-size: 10rem;
-  font-weight: 400;
+  font-weight: 800;
   color: white;
-  text-shadow: 8px 8px 50px rgba(0, 0, 0, 0.6);
+  text-shadow: 8px 8px 50px rgba(0, 0, 0, 1);
+  margin-bottom:4rem;
+  letter-spacing: -.8rem;
+  word-spacing:1.3rem;
+  margin-right:5.5rem;
 }
 
-.desc {
+.tagline { 
   font-family: Roboto, sans-serif;
-  font-size: 1.3rem;
-  padding-bottom: 30px; 
+  font-size: 2.2rem;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  font-style: italic;
+  text-shadow: 8px 8px 8px rgba(0, 0, 0, 1);
+  font-style: italic; 
 }
 
 .search-bar {
+  margin-top:2rem;
+  margin-bottom:11rem;
   display: flex;
   justify-content: center;
-  margin-top: 20px; /* Add some spacing below the description */
   width: 100%;
 }
 
@@ -52,6 +56,25 @@
     255,
     0.8
   ); /* Slightly transparent background */
+}
+
+#description {
+  font-family: Roboto, sans-serif;
+  font-size: 1rem;
+  margin-top: 30px; 
+  margin-bottom: 30px; 
+  padding: 15px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(
+    /* Make a complex colored gradient */ 150deg,
+    rgba(3, 62, 62, 0.3) 0%,
+    rgba(3, 51, 124, 1) 25%,
+    rgba(3, 71, 3, 0.5) 50%,
+    rgba(3, 43, 104, 1) 75%,
+    rgba(0, 255, 255, 0.3) 100%
+  );
+  border-radius:5px; 
 }
 
 /* ----------- CONTENT ----------- */

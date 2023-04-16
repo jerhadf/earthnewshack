@@ -1,39 +1,45 @@
 /* ----------- WHOLE WEBSITE ----------- */
-.container {
-  background: linear-gradient(to bottom, #3cb371, #228b22);
-}
 
-/* reset - default styles */
-* {
+* { 
+  /* Ensure that margin and padding are 0 by default */ 
   margin: 0;
   padding: 0;
-  border: 0;
-  line-height: 1.5;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* ----------- HEADER ----------- */
-.header {
-  background-size: cover;
+
+.hero {
+  /* Styles for the hero section */
+  background-image: url('./img/americas_space.png');
   background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.title {
-  font-size: 100px;
-  color: black; 
-  margin-top: 0;
-}
-
 .earth-news {
-  position: inherit; 
-  /* General styles for the EarthNews component */
-}
-
-.header {
-  position: inherit; 
-  /* Styles for the header section */
+  /* Styles for the Earth News text */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
 body {
@@ -41,54 +47,68 @@ body {
     sans-serif;
 }
 
-main {
-  align-items: center;
-}
-
-h1 {
+.header {
   text-align: center;
-  margin-bottom: 8px;
-  font-size: 1.8em;
-  font-weight: 500;
+  margin-bottom: 1rem;
 }
 
-h2 {
-  font-size: 1.5em;
-  font-weight: 500;
+p {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  /* Styles for the title */
+  margin-top: 0;
+  font-family: Avenir Book, Avenir, sans-serif; 
+  text-align: center;
+  position: absolute;
+  font-size: 3rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* ----------- CONTENT ----------- */
-.main-content {
-  /* Styles for the main content section */
-  position: inherit; 
-}
-.main-content {
-  padding: 2rem;
-}
 
-.search-container {
-  margin-top: 16px;
+.content {
+  /* Styles for the content section */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
 
 .search-bar {
-  width: 300px;
-  border: none;
-  border-radius: 4px;
-  margin-right: 8px;
-  font-size: 12px;
-  /* Add any other search bar styles you prefer */
+  /* Styles for the search bar */
+  display: flex;
+  background: linear-gradient(
+    135deg,
+    rgba(34, 139, 34, 1) 0%,
+    rgba(60, 179, 113, 1) 50%,
+    rgba(0, 128, 0, 1) 100%
+  );
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10vh;
+  padding: 1px;
+  width: 100%;
 }
 
-.search-button {
-  padding: 8px 16px;
-  background-color: #ffffff;
-  color: #3cb371;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+Autocomplete
 
 .MovableMap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
 }

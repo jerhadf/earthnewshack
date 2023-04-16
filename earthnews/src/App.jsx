@@ -120,7 +120,7 @@ export default function App() {
     <div className="app" role="main">
       {/* Hero section with background image */}
       <ParallaxHero>
-        <h1 className="title">EARTH NEWS</h1>
+        <h1 className="title">PLANET PULSE</h1>
         <p className="desc">
           A climate news aggregator, summarizer, explainer, and global
           visualizer

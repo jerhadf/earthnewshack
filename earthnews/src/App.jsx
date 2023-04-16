@@ -55,7 +55,7 @@ const getMarkers = async () => {
   const parsedData = parseResult.data;
 
   const markers = [];
-  const stop_point = 500;
+  const stop_point = 1000;
 
   for (let i = 0; i < Math.min(parsedData.length, stop_point); i++) {
     const row = parsedData[i];
@@ -85,7 +85,6 @@ console.log("Appending markers to markers array...");
 const markers = await getMarkers();
 
 // ======================================== APP COMPONENT ========================================
-
 export default function App() {
   // ======================================== FUNCTIONS ========================================
   // functions from convex - for handling messages - deleted

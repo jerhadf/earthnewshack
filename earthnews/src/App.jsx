@@ -26,7 +26,7 @@ export default function App() {
     setNewMessageText("");
     await sendMessage({ body: newMessageText, author: name });
   }
-
+  
   // put functions for handling articles data and maps here
 
   // FRONTEND STARTS HERE - REACT COMPONENTS + HTML

@@ -6,13 +6,14 @@ import { useMutation, useQuery } from "../convex/_generated/react";
 
 // custom components
 import MovableMap from "./MovableMap.jsx";
+import EarthSearch from "./EarthSearch";
 
 // material UI components
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
 // marker locations for the movable map demo
-// populate this from the back end in the future 
+// populate this from the back end in the future
 const markers = [
   {
     id: 1,
@@ -50,35 +51,39 @@ export default function App() {
       <div className="hero">
         <div className="earth-news">
           {/* Header with EarthNews title and background image */}
-          <header className="header">
-            <h1 className="title">EarthNews</h1>
-            <p>
-              A climate news aggregator, summarizer, explainer, and global
-              visualizer
-            </p>
-          </header>
+          {/* Design ideas: 
+          Parallax effect
+          Complex gradient + image
+          Memphis design 
+           */}
+          <h1 className="title">EARTH NEWS</h1>
+          <p className="desc">
+            A climate news aggregator, summarizer, explainer, and global
+            visualizer
+          </p>
         </div>
       </div>
 
       {/* Main content - map & search bar */}
       <main className="content">
-        {/* A large material UI search bar that extends across the entire screen  */}
-        {/* Search bar */}
-        <Autocomplete className="search-bar"
-          freeSolo
-          id="climate-news-search"
-          disableClearable
-          onInputChange={handleSearch}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Search Climate News"
-              margin="normal"
-              variant="outlined"
-              InputProps={{ ...params.InputProps, type: "search" }}
-            />
-          )}
-        />
+        {/* Search bar for climate news */}
+        <div className="search-bar">
+          <EarthSearch
+            id="earth-search"
+            freeSolo={true}
+            disableClearable
+            // onInputChange={handleSearch}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Search Climate News"
+                margin="normal"
+                variant="outlined"
+                InputProps={{ ...params.InputProps, type: "search" }}
+              />
+            )}
+          />
+        </div>
         {/* <YourMapComponent /> */}
         <MovableMap markers={markers} />
       </main>

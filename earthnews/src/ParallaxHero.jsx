@@ -27,7 +27,7 @@ const ParallaxHero = ({ children }) => {
       <Parallax
         blur={{ min: -15, max: 15 }}
         bgImage={backgroundImage}
-        bgImageAlt="Earth News Background"
+        bgImageAlt="Planet Pulse Background"
         strength={300}
         className="parallax-container"
       >

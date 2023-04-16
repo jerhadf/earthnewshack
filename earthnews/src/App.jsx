@@ -1,8 +1,7 @@
 import React from "react";
-import { useState, useEffect } from 'react';
 
 // imports for convex
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import { useMutation, useQuery } from "../convex/_generated/react";
 
 // custom components
@@ -37,6 +36,7 @@ import Papa from 'papaparse';
 //     description: "This is marker 2",
 //   },
 // ];
+
 // get more markers by parsing the big_dataset_2.csv file 
 // and then using the lat and long columns to create the markers
 // this data will be used to populate the map with markers
@@ -61,14 +61,17 @@ const getMarkers = async () => {
     const row = parsedData[i];
     const lat = parseFloat(row.lat);
     const lon = parseFloat(row.lon);
+    const summary = row.summary;
+    const date = row.date_published;
+
     const headline = row.headline;
 
     const marker = {
       id: i,
       lat: lat,
       lng: lon,
-      title: `${i}`,
-      description: headline,
+      title: headline,
+      description: summary,
     };
 
     markers.push(marker);

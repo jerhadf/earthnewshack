@@ -14,9 +14,8 @@ L.Icon.Default.mergeOptions({
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
 
-const MovableMap = ({ markers }) => {
+const MovableMap = ({ markers, icon }) => {
   const [selectedMarker, setSelectedMarker] = useState(null);
-
   return (
     <MapContainer
       className="MovableMap"
@@ -31,6 +30,7 @@ const MovableMap = ({ markers }) => {
       {markers.map((marker) => (
         <Marker
           key={marker.id}
+          icon={icon} // add custom icons from the prop
           position={[marker.lat, marker.lng]}
           eventHandlers={{
             click: () => {

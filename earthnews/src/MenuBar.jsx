@@ -21,8 +21,6 @@ const MenuBar = () => {
     window.location.href = "https://count-us-in.com/"; // Redirect 
   }
 
-  
-
   return (
     <AppBar
       className="menu-bar"

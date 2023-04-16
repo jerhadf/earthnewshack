@@ -21,11 +21,11 @@ var LeafIcon = L.Icon.extend({
     iconUrl: greenLeafIcon,
     shadowUrl:
       "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-    iconSize: [38, 95],
-    shadowSize: [50, 64],
-    iconAnchor: [22, 94],
-    shadowAnchor: [4, 62],
-    popupAnchor: [-3, -76],
+    iconSize: [19, 47], // Reduced size
+    shadowSize: [10, 15], // Reduced size
+    iconAnchor: [9, 47], // Adjusted to match the new icon size
+    shadowAnchor: [2, 15], // Adjusted to match the new shadow size
+    popupAnchor: [-1, -38], // Adjusted to match the new icon size
   },
 });
 

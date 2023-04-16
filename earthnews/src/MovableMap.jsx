@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import greenLeafIcon from "./assets/leaf_green.png";
 
 // Fix the Leaflet icon issue
 delete L.Icon.Default.prototype._getIconUrl;
@@ -13,6 +14,23 @@ L.Icon.Default.mergeOptions({
   shadowUrl:
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
+
+// make green leaf icon extension of L.Icon
+var LeafIcon = L.Icon.extend({
+  options: {
+    iconUrl: greenLeafIcon,
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
+    iconSize: [38, 95],
+    shadowSize: [50, 64],
+    iconAnchor: [22, 94],
+    shadowAnchor: [4, 62],
+    popupAnchor: [-3, -76],
+  },
+});
+
+// Create an instance of the green leaf icon
+var greenIcon = new LeafIcon();
 
 const MovableMap = ({ markers }) => {
   const [selectedMarker, setSelectedMarker] = useState(null);
@@ -30,7 +48,7 @@ const MovableMap = ({ markers }) => {
       {markers.map((marker) => (
         <Marker
           key={marker.id}
-          // icon={icon} // add custom icons from the prop
+          icon={greenIcon} // pass in the greenIcon class
           position={[marker.lat, marker.lng]}
           eventHandlers={{
             click: () => {

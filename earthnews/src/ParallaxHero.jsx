@@ -2,7 +2,7 @@ import React from "react";
 import { Parallax } from "react-parallax";
 import "./ParallaxHero.css";
 import MenuBar from "./MenuBar";
-import backgroundImage from "../public/img/wideangleearth.png";
+import backgroundImage from "./assets/wideangleearth.png";
 
 // this is the custom component for the entire hero section
 const ParallaxHero = ({ children }) => {

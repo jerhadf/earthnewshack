@@ -3,12 +3,11 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import "./MenuBar.css";
-import logo from '../public/img/planetpulselogo.png'; // Replace './logo.png' with the path to your logo file
-
+import logo from './assets/planetpulselogo.png'; // Replace './logo.png' with the path to your logo file
 
 const MenuBar = () => {
 
-
+  // handle the links - in the MVP, don't make pages, just redirect to other links
   const handleAboutClick = () => {
     // Function to handle About button click
     console.log("About clicked"); // Replace with your desired logic

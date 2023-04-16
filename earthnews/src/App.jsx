@@ -19,71 +19,9 @@ import { useRef } from "react";
 import Papa from "papaparse";
 
 // import images
-// import greenLeafIcon from './assets/leaf_green.png';
+import greenLeafIcon from "./assets/leaf_green.png";
 
 // ======================================== FUNCTIONS FOR MAPPING ========================================
-
-// get more markers by parsing the big_dataset_2.csv file
-// and then using the lat and long columns to create the markers
-// this data will be used to populate the map with markers
-const getMarkers = async () => {
-  console.log("Getting markers from data file...");
-  const datafile = "/data/big_dataset_2.csv";
-
-  const response = await fetch(datafile);
-  const fileContent = await response.text();
-
-  const parseResult = Papa.parse(fileContent, {
-    header: true,
-    skipEmptyLines: true,
-  });
-
-  const parsedData = parseResult.data;
-
-  const markers = [];
-  const stop_point = 1000;
-
-  for (let i = 0; i < Math.min(parsedData.length, stop_point); i++) {
-    const row = parsedData[i];
-    const lat = parseFloat(row.lat);
-    const lon = parseFloat(row.lon);
-    const summary = row.summary;
-    const date = row.date_published;
-
-    const headline = row.headline;
-
-    const marker = {
-      id: i,
-      lat: lat,
-      lng: lon,
-      title: headline,
-      description: summary,
-    };
-
-    markers.push(marker);
-  }
-
-  return markers;
-};
-
-// extend the Icon class to make leaf icon
-// var LeafIcon = L.Icon.extend({
-//   options: {
-//     shadowUrl: {greenLeafIcon}},
-//     iconSize: [38, 95],
-//     shadowSize: [50, 64],
-//     iconAnchor: [22, 94],
-//     shadowAnchor: [4, 62],
-//     popupAnchor: [-3, -76],
-//   },
-// });
-
-// make different icon colors for the markers
-// var greenIcon = new LeafIcon({iconUrl: greenLeafIcon});
-
-// append the markers from the function above to the markers array
-console.log("Appending markers to markers array...");
-const markers = await getMarkers();
 
 // ======================================== REACT APP ========================================
 export default function App() {
@@ -108,17 +46,70 @@ export default function App() {
     mapRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  // get the map markers and update them asynchronously
+  // ======================================== FUNCTIONS FOR MAPPING ========================================
   const [markers, setMarkers] = useState([]);
 
   useEffect(() => {
-    (async () => {
+    // Get more markers by parsing the big_dataset_2.csv file, using the lat and long columns to create the markers
+    // This data will be used to populate the map with markers
+    async function getMarkers() {
+      console.log("Getting markers from data file...");
+      const datafile = "/data/big_dataset_2.csv";
+
+      const response = await fetch(datafile);
+      const fileContent = await response.text();
+
+      const parseResult = Papa.parse(fileContent, {
+        header: true,
+        skipEmptyLines: true,
+      });
+
+      const parsedData = parseResult.data;
+
+      const markers = [];
+      const stop_point = 1000;
+
+      for (let i = 0; i < Math.min(parsedData.length, stop_point); i++) {
+        const row = parsedData[i];
+        const lat = parseFloat(row.lat);
+        const lon = parseFloat(row.lon);
+        const summary = row.summary;
+        const date = row.date_published;
+
+        const headline = row.headline;
+
+        const marker = {
+          id: i,
+          lat: lat,
+          lng: lon,
+          title: headline,
+          description: summary,
+        };
+
+        markers.push(marker);
+      }
+
+      return markers;
+    }
+
+    async function fetchMarkers() {
+      console.log("Fetching markers (async)...");
       const fetchedMarkers = await getMarkers();
       setMarkers(fetchedMarkers);
-    })();
+    }
+
+    fetchMarkers();
   }, []);
 
-  // put functions for handling articles data and maps here
+  // // get the map markers and update them asynchronously
+  // const [markers, setMarkers] = useState([]);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const fetchedMarkers = await getMarkers();
+  //     setMarkers(fetchedMarkers);
+  //   })();
+  // }, []);
 
   // ======================================== FRONTEND STARTS HERE ========================================
   return (

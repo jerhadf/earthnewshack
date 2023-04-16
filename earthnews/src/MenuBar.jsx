@@ -5,7 +5,24 @@ import Button from "@mui/material/Button";
 import "./MenuBar.css";
 import logo from '../public/img/planetpulselogo.png'; // Replace './logo.png' with the path to your logo file
 
+
 const MenuBar = () => {
+
+
+  const handleAboutClick = () => {
+    // Function to handle About button click
+    console.log("About clicked"); // Replace with your desired logic
+    window.location.href = "https://docs.google.com/presentation/d/1LDB3gvV9cwCqZ-O7yDdkXeSpXPWxQ7MqTYXKUkgzP8g/edit?usp=sharing"; // Redirect to the About page
+  }
+
+  const handleLearnMore = () => {
+    // Function to handle About button click
+    console.log("Learn more clicked"); // Replace with your desired logic
+    window.location.href = "https://count-us-in.com/"; // Redirect 
+  }
+
+  
+
   return (
     <AppBar
       className="menu-bar"
@@ -19,7 +36,7 @@ const MenuBar = () => {
           <Button
             className="menu-button"
             color="inherit"
-            onClick={() => console.log("About clicked")}
+            onClick={handleAboutClick}
           >
             About
           </Button>
@@ -28,7 +45,7 @@ const MenuBar = () => {
           <Button
             className="menu-button"
             color="inherit"
-            onClick={() => console.log("Learn More clicked")}
+            onClick={handleLearnMore}
           >
             Learn More
           </Button>
@@ -39,3 +56,4 @@ const MenuBar = () => {
 };
 
 export default MenuBar;
+

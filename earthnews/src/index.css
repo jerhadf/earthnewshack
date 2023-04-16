@@ -15,26 +15,26 @@
 .header {
   background-size: cover;
   background-position: center;
-  height: 100vh; /* Adjust this value to control the height of the header */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .title {
-  font-size: 48px;
-  color: #ffffff;
+  font-size: 100px;
+  color: black; 
   margin-top: 0;
 }
 
 .earth-news {
+  position: inherit; 
   /* General styles for the EarthNews component */
 }
 
 .header {
+  position: inherit; 
   /* Styles for the header section */
 }
-
 
 body {
   font-family: system-ui, "Segoe UI", Roboto, "Helvetica Neue", helvetica,
@@ -42,10 +42,7 @@ body {
 }
 
 main {
-  padding-top: 1em;
-  padding-bottom: 1em;
-  width: min(800px, 95vw);
-  margin: 0 auto;
+  align-items: center;
 }
 
 h1 {
@@ -63,6 +60,7 @@ h2 {
 /* ----------- CONTENT ----------- */
 .main-content {
   /* Styles for the main content section */
+  position: inherit; 
 }
 .main-content {
   padding: 2rem;
@@ -88,4 +86,9 @@ h2 {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.MovableMap {
+  width: 100%;
+  height: 100%;
 }

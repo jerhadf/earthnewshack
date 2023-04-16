@@ -1,7 +1,7 @@
 import React from "react";
 
 // imports for convex
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "../convex/_generated/react";
 
 // custom components
@@ -16,28 +16,14 @@ import InputBase from "@mui/material/InputBase";
 
 // other react imports
 import { useRef } from "react";
-import Papa from 'papaparse';
+import Papa from "papaparse";
 
-// marker locations for the movable map demo
-// populate this from the back end in the future
-// const markers = [
-//   {
-//     id: 1,
-//     lat: 51.505,
-//     lng: -0.09,
-//     title: "Marker 1",
-//     description: "This is marker 1",
-//   },
-//   {
-//     id: 2,
-//     lat: 51.51,
-//     lng: -0.1,
-//     title: "Marker 2",
-//     description: "This is marker 2",
-//   },
-// ];
+// import images
+import greenLeafIcon from './assets/leaf_green.png';
 
-// get more markers by parsing the big_dataset_2.csv file 
+// ======================================== FUNCTIONS FOR MAPPING ========================================
+
+// get more markers by parsing the big_dataset_2.csv file
 // and then using the lat and long columns to create the markers
 // this data will be used to populate the map with markers
 const getMarkers = async () => {
@@ -80,11 +66,26 @@ const getMarkers = async () => {
   return markers;
 };
 
+// extend the Icon class to make leaf icon
+// var LeafIcon = L.Icon.extend({
+//   options: {
+//     shadowUrl: {greenLeafIcon}},
+//     iconSize: [38, 95],
+//     shadowSize: [50, 64],
+//     iconAnchor: [22, 94],
+//     shadowAnchor: [4, 62],
+//     popupAnchor: [-3, -76],
+//   },
+// });
+
+// make different icon colors for the markers
+var greenIcon = new LeafIcon({iconUrl: greenLeafIcon});
+
 // append the markers from the function above to the markers array
 console.log("Appending markers to markers array...");
 const markers = await getMarkers();
 
-// ======================================== APP COMPONENT ========================================
+// ======================================== REACT APP ========================================
 export default function App() {
   // ======================================== FUNCTIONS ========================================
   // functions from convex - for handling messages - deleted
@@ -92,8 +93,12 @@ export default function App() {
 
   // function for handling search from search bar
   const handleSearch = (event, value) => {
+    // when search input done, scroll to the map
+    scrollToMap();
     // Perform search action here based on the value
     console.log("Search value:", value);
+    // zoom to the coordinates in the search bar
+    // assume that the first is the lat and the second is the long (comma-seperated)
   };
 
   // handling scroll to map
@@ -145,7 +150,7 @@ export default function App() {
               type="button"
               sx={{ p: "10px" }}
               aria-label="search"
-              onClick={scrollToMap} // on click, scroll to the map
+              onClick={handleSearch} // on click, call the handleSearch function
             >
               <SearchIcon />
             </IconButton>
@@ -156,7 +161,7 @@ export default function App() {
       {/* Main content - map */}
       <main className="content">
         <div className="map-container" ref={mapRef}>
-          <MovableMap markers={markers} />
+          <MovableMap markers={markers} icon={greenIcon} />
         </div>
       </main>
     </div>

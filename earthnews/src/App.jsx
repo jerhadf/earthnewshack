@@ -54,7 +54,7 @@ export default function App() {
         </main>
       </div>
 
-      {/* Messages Stuff - FROM CONVEX DEMO */}
+      {/* Deprecated - Messages Stuff - FROM CONVEX DEMO */}
       <p className="badge">
         <span>{name}</span>
       </p>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Parallax } from "react-parallax";
 import "./ParallaxHero.css";
+import TransparentMenuBar from "./TransparentMenuBar";
 
 // this is the custom component for the entire hero section
 const ParallaxHero = ({ children }) => {
@@ -18,6 +19,8 @@ const ParallaxHero = ({ children }) => {
       >
         <div style={{ height: "100vh" }} />
       </Parallax>
+
+      <TransparentMenuBar />
       
       {/* Content section */}
       <div className="hero-content">{children}</div>

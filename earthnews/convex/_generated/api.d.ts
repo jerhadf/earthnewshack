@@ -11,8 +11,9 @@
 
 import type { ApiFromModules } from "convex/api";
 import type * as actions_openai from "../actions/openai";
-import type * as deleteduplicates from "../deleteduplicates";
+import type * as listArticles from "../listArticles";
 import type * as listMessages from "../listMessages";
+import type * as sendArticle from "../sendArticle";
 import type * as sendMessage from "../sendMessage";
 
 /**
@@ -26,7 +27,8 @@ import type * as sendMessage from "../sendMessage";
  */
 export type API = ApiFromModules<{
   "actions/openai": typeof actions_openai;
-  deleteduplicates: typeof deleteduplicates;
+  listArticles: typeof listArticles;
   listMessages: typeof listMessages;
+  sendArticle: typeof sendArticle;
   sendMessage: typeof sendMessage;
 }>;

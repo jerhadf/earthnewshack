@@ -8,6 +8,7 @@
     "dev:server": "convex dev",
     "dev:client": "vite --open --clearScreen false",
     "dev:init": "convex dev --once"
+    
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",

@@ -1,2 +1,2 @@
 # earthnewshack
-HackDartmouth project for earth news aggregation
+HackDartmouth project for PLANET PULSE aggregation

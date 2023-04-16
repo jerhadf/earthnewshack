@@ -56,7 +56,7 @@ const retrievedUser = await db.get(documentId);
           Complex gradient + image
           Memphis design 
            */}
-    <h1 className="title">EARTH NEWS</h1>
+    <h1 className="title">PLANET PULSE</h1>
     <p className="desc">
       A climate news aggregator, summarizer, explainer, and global visualizer
     </p>

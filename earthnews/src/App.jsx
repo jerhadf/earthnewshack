@@ -19,7 +19,7 @@ import { useRef } from "react";
 import Papa from "papaparse";
 
 // import images
-import greenLeafIcon from './assets/leaf_green.png';
+// import greenLeafIcon from './assets/leaf_green.png';
 
 // ======================================== FUNCTIONS FOR MAPPING ========================================
 
@@ -79,7 +79,7 @@ const getMarkers = async () => {
 // });
 
 // make different icon colors for the markers
-var greenIcon = new LeafIcon({iconUrl: greenLeafIcon});
+// var greenIcon = new LeafIcon({iconUrl: greenLeafIcon});
 
 // append the markers from the function above to the markers array
 console.log("Appending markers to markers array...");
@@ -161,7 +161,7 @@ export default function App() {
       {/* Main content - map */}
       <main className="content">
         <div className="map-container" ref={mapRef}>
-          <MovableMap markers={markers} icon={greenIcon} />
+          <MovableMap markers={markers} />
         </div>
       </main>
     </div>

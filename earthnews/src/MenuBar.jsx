@@ -3,9 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import "./MenuBar.css";
-import logo from '../public/img/earthglobe.png'; // Replace './logo.png' with the path to your logo file
-
-{/* <img src="%PUBLIC_URL%/img/logo.png" alt="Logo" /> */}
+import logo from '../public/img/planetpulselogo.png'; // Replace './logo.png' with the path to your logo file
 
 const MenuBar = () => {
   return (

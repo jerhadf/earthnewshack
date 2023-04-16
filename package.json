@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "convex": "^0.12.4",
-    "google-map-react": "^2.2.0",
-    "leaflet": "^1.9.3",
-    "react-leaflet": "^4.2.1"
-  }
-}

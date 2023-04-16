@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import greenLeafIcon from "./assets/leaf_green.png";
+import { useMap } from "react-leaflet";
 
 // Fix the Leaflet icon issue
 delete L.Icon.Default.prototype._getIconUrl;
@@ -32,13 +33,28 @@ var LeafIcon = L.Icon.extend({
 // Create an instance of the green leaf icon
 var greenIcon = new LeafIcon();
 
+function useLeafletMap() {
+  const map = useMap();
+  return map;
+}
+
 const MovableMap = ({ markers }) => {
   const [selectedMarker, setSelectedMarker] = useState(null);
+  // for flying to specific location 
+  const map = useLeafletMap();
+  const flyToLocation = (lat, lng, zoom) => {
+    map.flyTo([lat, lng], zoom);
+  };
   return (
     <MapContainer
       className="MovableMap"
-      center={[-3.4, -60.6]} // The MapContainer starts zoomed into the Amazon Rainforest
-      zoom={3}
+      // coordinates for bangladesh 
+      center={[23.6850, 90.3563]}
+      zoom={7}
+      // center={[43.702245, -72.289552]} // Updated coordinates for Hanover, New Hampshire
+      // zoom={8} // Updated zoom level to increase
+      // center={[-3.4, -60.6]} // The MapContainer starts zoomed into the Amazon Rainforest
+      // zoom={3}
       style={{ width: "100%", height: "100%" }}
     >
       <TileLayer

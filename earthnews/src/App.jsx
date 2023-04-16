@@ -6,11 +6,16 @@ import { useMutation, useQuery } from "../convex/_generated/react";
 
 // custom components
 import MovableMap from "./MovableMap.jsx";
-import EarthSearch from "./EarthSearch";
+import ParallaxHero from "./ParallaxHero";
 
 // material UI components
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import Paper from "@mui/material/Paper";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
+
+// other react imports
+import { useRef } from "react";
 
 // marker locations for the movable map demo
 // populate this from the back end in the future
@@ -42,50 +47,58 @@ export default function App() {
     console.log("Search value:", value);
   };
 
+  // handling scroll to map
+  // useRef is a React Hook that allows you to create a mutable ref object that can be attached to a DOM element
+  const mapRef = useRef(); // ref for the map
+  const scrollToMap = () => {
+    mapRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   // put functions for handling articles data and maps here
 
   // ======================================== FRONTEND STARTS HERE ========================================
   return (
     <div className="app" role="main">
-      {/* Hero section */}
-      <div className="hero">
-        <div className="earth-news">
-          {/* Header with EarthNews title and background image */}
-          {/* Design ideas: 
-          Parallax effect
-          Complex gradient + image
-          Memphis design 
-           */}
-          <h1 className="title">EARTH NEWS</h1>
-          <p className="desc">
-            A climate news aggregator, summarizer, explainer, and global
-            visualizer
-          </p>
-        </div>
-      </div>
-
-      {/* Main content - map & search bar */}
-      <main className="content">
-        {/* Search bar for climate news */}
+      {/* Hero section with background image */}
+      <ParallaxHero>
+        <h1 className="title">EARTH NEWS</h1>
+        <p className="desc">
+          A climate news aggregator, summarizer, explainer, and global
+          visualizer
+        </p>
         <div className="search-bar">
-          <EarthSearch
-            id="earth-search"
-            freeSolo={true}
-            disableClearable
-            // onInputChange={handleSearch}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Search Climate News"
-                margin="normal"
-                variant="outlined"
-                InputProps={{ ...params.InputProps, type: "search" }}
-              />
-            )}
-          />
+          <Paper
+            component="form"
+            sx={{
+              p: "2px 4px",
+              display: "flex",
+              alignItems: "center",
+              width: 500,
+              maxWidth: "100%",
+            }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search for a location to explore news on Planet Earth"
+              inputProps={{ "aria-label": "search for a location" }}
+            />
+            <IconButton
+              type="button"
+              sx={{ p: "10px" }}
+              aria-label="search"
+              onClick={scrollToMap} // on click, scroll to the map
+            >
+              <SearchIcon />
+            </IconButton>
+          </Paper>
         </div>
-        {/* <YourMapComponent /> */}
-        <MovableMap markers={markers} />
+      </ParallaxHero>
+
+      {/* Main content - map */}
+      <main className="content">
+        <div className="map-container" ref={mapRef}>
+          <MovableMap markers={markers} />
+        </div>
       </main>
     </div>
   );

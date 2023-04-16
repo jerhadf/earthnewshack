@@ -1,23 +1,38 @@
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import './MenuBar.css';
+import React from "react";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
+import "./MenuBar.css";
+import logo from '../public/img/earthglobe.png'; // Replace './logo.png' with the path to your logo file
 
 const MenuBar = () => {
   return (
-    <AppBar position="static" className="menu-bar">
+    <AppBar
+      className="menu-bar"
+      position="absolute"
+      color="transparent"
+      elevation={0}
+    >
+      {/* Add style prop here */}
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Box sx={{ cursor: 'pointer' }} onClick={() => console.log('About clicked')}>
+        <div className="button-container">
+          <Button
+            className="menu-button"
+            color="inherit"
+            onClick={() => console.log("About clicked")}
+          >
             About
-          </Box>
-        </Typography>
-        <Button color="inherit" onClick={() => console.log('Learn More clicked')}>
-          Learn More
-        </Button>
+          </Button>
+          {/* Logo image */}
+          <img src={logo} alt="Logo" className="menu-logo" /> 
+          <Button
+            className="menu-button"
+            color="inherit"
+            onClick={() => console.log("Learn More clicked")}
+          >
+            Learn More
+          </Button>
+        </div>
       </Toolbar>
     </AppBar>
   );

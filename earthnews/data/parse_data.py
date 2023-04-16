@@ -8,10 +8,11 @@ import ast
 
 openai.api_key = "" # Replace this with your OpenAI API key
 
-def generate_summary(json_article_content):
-    input_text = json_article_content['body']
 
-    prompt = (f"Please summarize the following text:\n{input_text}\n\nSummary:")
+
+def generate_summary(input_text):
+
+    prompt = (f"Please summarize the following text in 3-4 sentences:\n{input_text}\n\nSummary:")
     completion = openai.ChatCompletion.create(
         model = 'gpt-3.5-turbo',
         messages = [
@@ -20,13 +21,10 @@ def generate_summary(json_article_content):
     )
     summary = completion['choices'][0]['message']['content']
 
-    data = {"header": "summary", "body": summary}
-    json_string = json.dumps(data)
-    return json_string
+    return summary
 
-def extract_loc(json_article_content):
-    input_text = json_article_content['body']
-    prompt = (f"Please extract the relevant locations in regards to climate change:\n{input_text}\n\. Return these locations in a python list format.")
+def extract_loc(input_text):
+    prompt = (f"Please extract the relevant locations in this text in regards to climate change, and return these in a comma separated list. eg ['New York', '(Baton Rouge, Louisiana)', 'China']. The text is: \n{input_text}\n\. ")
     completion = openai.ChatCompletion.create(
             model = 'gpt-3.5-turbo',
             messages = [
@@ -34,19 +32,26 @@ def extract_loc(json_article_content):
             ],
         )
     locations = completion['choices'][0]['message']['content']
-    locations = ast.literal_eval(locations)
+    locations = locations.split(',')
     df = pd.DataFrame(columns=['address', 'latitude', 'longitude'])
 
+    non_dup = []
+    #remove duplicates
     for i in range(len(locations)):
-        address, latitude, longitude = get_coordinates(locations[i])
-        df = pd.concat([df, pd.DataFrame({'address': [address], 'latitude': [latitude], 'longitude': [longitude]})], ignore_index=True)
+        for j in range(len(locations)):
+            if locations[i] in locations[j] and i != j:
+                non_dup.append(locations[i])
 
-    return df, df.to_json(orient='records'), completion
+    for i in range(len(non_dup)):
+        if non_dup is not None:
+            address, latitude, longitude = get_coordinates(non_dup[i])
+            df = pd.concat([df, pd.DataFrame({'address': [address], 'latitude': [latitude], 'longitude': [longitude]})], ignore_index=True)
+
+    return df
 
 
-def extract_explanation(summary, level='beginner'):
-    input_text = summary['body']
-    prompt = (f"Please explain what is happening in the following text as if you were teaching a {level}. Be sure to include explanations at a {level} level for any relevant key topics.  The text is:\n{input_text}\n\. Return these explanations in a comma separated list:")
+def extract_explanation(input_text, level='college student'):
+    prompt = (f"You are a climate scientist that explains things at a 8th grade level. Define the 2-4 most complicated climate-change related words in the following text:\n{input_text}\n\.")
     completion = openai.ChatCompletion.create(
             model = 'gpt-3.5-turbo',
             messages = [
@@ -57,15 +62,28 @@ def extract_explanation(summary, level='beginner'):
     explanation = completion['choices'][0]['message']['content']
 
 
-    data = {"header": "explanation", "body": explanation, "level": level}
+    return explanation, level
 
-    return data
+
+# def do_geocode(address, attempt=1, max_attempts=5):
+#     try:
+#         return geopy.geocode(address)
+#     except GeocoderTimedOut:
+#         if attempt <= max_attempts:
+#             return do_geocode(address, attempt=attempt+1)
+#         raise
 
 
 def get_coordinates(location):
     geolocator = Nominatim(user_agent="location_script")
-    location_data = geolocator.geocode(location)
-    
+    try:
+        location_data = geolocator.geocode(location)
+    except:
+        print('Timeout error')
+        return None, None, None
+    #location_data= do_geocode(location)
+    if location_data is None:
+        return None, None, None
     return location_data.address, location_data.latitude, location_data.longitude
 
 

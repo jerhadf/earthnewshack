@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import "./MenuBar.css";
 import logo from '../public/img/earthglobe.png'; // Replace './logo.png' with the path to your logo file
 
+{/* <img src="%PUBLIC_URL%/img/logo.png" alt="Logo" /> */}
+
 const MenuBar = () => {
   return (
     <AppBar

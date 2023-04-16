@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from 'react';
 
 // imports for convex
 import { useState } from "react";
@@ -16,25 +17,71 @@ import InputBase from "@mui/material/InputBase";
 
 // other react imports
 import { useRef } from "react";
+import Papa from 'papaparse';
 
 // marker locations for the movable map demo
 // populate this from the back end in the future
-const markers = [
-  {
-    id: 1,
-    lat: 51.505,
-    lng: -0.09,
-    title: "Marker 1",
-    description: "This is marker 1",
-  },
-  {
-    id: 2,
-    lat: 51.51,
-    lng: -0.1,
-    title: "Marker 2",
-    description: "This is marker 2",
-  },
-];
+// const markers = [
+//   {
+//     id: 1,
+//     lat: 51.505,
+//     lng: -0.09,
+//     title: "Marker 1",
+//     description: "This is marker 1",
+//   },
+//   {
+//     id: 2,
+//     lat: 51.51,
+//     lng: -0.1,
+//     title: "Marker 2",
+//     description: "This is marker 2",
+//   },
+// ];
+// get more markers by parsing the big_dataset_2.csv file 
+// and then using the lat and long columns to create the markers
+// this data will be used to populate the map with markers
+const getMarkers = async () => {
+  console.log("Getting markers from data file...");
+  const datafile = "/data/big_dataset_2.csv";
+
+  const response = await fetch(datafile);
+  const fileContent = await response.text();
+
+  const parseResult = Papa.parse(fileContent, {
+    header: true,
+    skipEmptyLines: true,
+  });
+
+  const parsedData = parseResult.data;
+
+  const markers = [];
+  const stop_point = 500;
+
+  for (let i = 0; i < Math.min(parsedData.length, stop_point); i++) {
+    const row = parsedData[i];
+    const lat = parseFloat(row.lat);
+    const lon = parseFloat(row.lon);
+    const headline = row.headline;
+
+    const marker = {
+      id: i,
+      lat: lat,
+      lng: lon,
+      title: `${i}`,
+      description: headline,
+    };
+
+    markers.push(marker);
+  }
+
+  return markers;
+};
+
+// append the markers from the function above to the markers array
+console.log("Appending markers to markers array...");
+const markers = await getMarkers();
+
+// ======================================== APP COMPONENT ========================================
 
 export default function App() {
   // ======================================== FUNCTIONS ========================================
@@ -53,6 +100,16 @@ export default function App() {
   const scrollToMap = () => {
     mapRef.current.scrollIntoView({ behavior: "smooth" });
   };
+
+  // get the map markers and update them asynchronously
+  const [markers, setMarkers] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const fetchedMarkers = await getMarkers();
+      setMarkers(fetchedMarkers);
+    })();
+  }, []);
 
   // put functions for handling articles data and maps here
 

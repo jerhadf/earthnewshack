@@ -12,6 +12,7 @@
 import type { ApiFromModules } from "convex/api";
 import type * as actions_openai from "../actions/openai";
 import type * as listMessages from "../listMessages";
+import type * as searchMessages from "../searchMessages";
 import type * as sendMessage from "../sendMessage";
 
 /**
@@ -26,5 +27,6 @@ import type * as sendMessage from "../sendMessage";
 export type API = ApiFromModules<{
   "actions/openai": typeof actions_openai;
   listMessages: typeof listMessages;
+  searchMessages: typeof searchMessages;
   sendMessage: typeof sendMessage;
 }>;

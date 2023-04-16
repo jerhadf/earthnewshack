@@ -3,7 +3,6 @@
 // repository source here: https://github.com/ianmacartney/convex-chat-gpt/blob/main/convex/actions/openai.js
 // tutorial here: https://stack.convex.dev/full-stack-chatgpt-app
 
-
 import { Configuration, OpenAIApi } from "openai";
 import { action } from "../_generated/server";
 

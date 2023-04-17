@@ -35,6 +35,9 @@ export default function App() {
     scrollToMap();
     // Perform search action here based on the value
     console.log("Search value:", value);
+
+    // set target location
+    // setTargetLocation({ lat, lng, zoom });
     // zoom to the coordinates in the search bar
     // assume that the first is the lat and the second is the long (comma-seperated)
   };
@@ -75,8 +78,13 @@ export default function App() {
         const lon = parseFloat(row.lon);
         const summary = row.summary;
         const date = row.date_published;
-
         const headline = row.headline;
+
+        // validate for coordinates
+        if (isNaN(lat) || isNaN(lon)) {
+          console.error(`Invalid coordinates at row ${i}: (${lat}, ${lon})`);
+          continue;
+        }
 
         const marker = {
           id: i,
@@ -145,8 +153,8 @@ export default function App() {
           </Paper>
         </div>
         <p id="description">
-            Collect climate news from around the world. Summarize & explain with
-            AI. Visualize on a world map.
+          Collect climate news from around the world. Summarize & explain with
+          AI. Visualize on a world map.
         </p>
       </ParallaxHero>
 
